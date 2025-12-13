@@ -213,28 +213,6 @@ API responses are strongly typed using interfaces to ensure reliability and main
 
 ---
 
-### 📘 Book Interface
-
-```typescript
-export interface Book {
-  id: number
-  title: string
-  description: string
-  genre: string
-  isBorrowed: boolean
-  author: {
-    id: number
-    name: string
-  }
-}
-
-
-export interface Author{
-    id : number,
-    name:string,
-    bio : string
-}
----
 
 
 
