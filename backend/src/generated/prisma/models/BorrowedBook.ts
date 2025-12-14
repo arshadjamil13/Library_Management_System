@@ -240,16 +240,16 @@ export type BorrowedBookOrderByWithRelationInput = {
 
 export type BorrowedBookWhereUniqueInput = Prisma.AtLeast<{
   id?: number
-  bookId?: number
   AND?: Prisma.BorrowedBookWhereInput | Prisma.BorrowedBookWhereInput[]
   OR?: Prisma.BorrowedBookWhereInput[]
   NOT?: Prisma.BorrowedBookWhereInput | Prisma.BorrowedBookWhereInput[]
+  bookId?: Prisma.IntFilter<"BorrowedBook"> | number
   userId?: Prisma.IntFilter<"BorrowedBook"> | number
   borrowedAt?: Prisma.DateTimeFilter<"BorrowedBook"> | Date | string
   returnedAt?: Prisma.DateTimeNullableFilter<"BorrowedBook"> | Date | string | null
   book?: Prisma.XOR<Prisma.BookScalarRelationFilter, Prisma.BookWhereInput>
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
-}, "id" | "bookId">
+}, "id">
 
 export type BorrowedBookOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -336,11 +336,6 @@ export type BorrowedBookOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
 }
 
-export type BorrowedBookNullableScalarRelationFilter = {
-  is?: Prisma.BorrowedBookWhereInput | null
-  isNot?: Prisma.BorrowedBookWhereInput | null
-}
-
 export type BorrowedBookCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   bookId?: Prisma.SortOrder
@@ -419,36 +414,46 @@ export type BorrowedBookUncheckedUpdateManyWithoutUserNestedInput = {
   deleteMany?: Prisma.BorrowedBookScalarWhereInput | Prisma.BorrowedBookScalarWhereInput[]
 }
 
-export type BorrowedBookCreateNestedOneWithoutBookInput = {
-  create?: Prisma.XOR<Prisma.BorrowedBookCreateWithoutBookInput, Prisma.BorrowedBookUncheckedCreateWithoutBookInput>
-  connectOrCreate?: Prisma.BorrowedBookCreateOrConnectWithoutBookInput
-  connect?: Prisma.BorrowedBookWhereUniqueInput
+export type BorrowedBookCreateNestedManyWithoutBookInput = {
+  create?: Prisma.XOR<Prisma.BorrowedBookCreateWithoutBookInput, Prisma.BorrowedBookUncheckedCreateWithoutBookInput> | Prisma.BorrowedBookCreateWithoutBookInput[] | Prisma.BorrowedBookUncheckedCreateWithoutBookInput[]
+  connectOrCreate?: Prisma.BorrowedBookCreateOrConnectWithoutBookInput | Prisma.BorrowedBookCreateOrConnectWithoutBookInput[]
+  createMany?: Prisma.BorrowedBookCreateManyBookInputEnvelope
+  connect?: Prisma.BorrowedBookWhereUniqueInput | Prisma.BorrowedBookWhereUniqueInput[]
 }
 
-export type BorrowedBookUncheckedCreateNestedOneWithoutBookInput = {
-  create?: Prisma.XOR<Prisma.BorrowedBookCreateWithoutBookInput, Prisma.BorrowedBookUncheckedCreateWithoutBookInput>
-  connectOrCreate?: Prisma.BorrowedBookCreateOrConnectWithoutBookInput
-  connect?: Prisma.BorrowedBookWhereUniqueInput
+export type BorrowedBookUncheckedCreateNestedManyWithoutBookInput = {
+  create?: Prisma.XOR<Prisma.BorrowedBookCreateWithoutBookInput, Prisma.BorrowedBookUncheckedCreateWithoutBookInput> | Prisma.BorrowedBookCreateWithoutBookInput[] | Prisma.BorrowedBookUncheckedCreateWithoutBookInput[]
+  connectOrCreate?: Prisma.BorrowedBookCreateOrConnectWithoutBookInput | Prisma.BorrowedBookCreateOrConnectWithoutBookInput[]
+  createMany?: Prisma.BorrowedBookCreateManyBookInputEnvelope
+  connect?: Prisma.BorrowedBookWhereUniqueInput | Prisma.BorrowedBookWhereUniqueInput[]
 }
 
-export type BorrowedBookUpdateOneWithoutBookNestedInput = {
-  create?: Prisma.XOR<Prisma.BorrowedBookCreateWithoutBookInput, Prisma.BorrowedBookUncheckedCreateWithoutBookInput>
-  connectOrCreate?: Prisma.BorrowedBookCreateOrConnectWithoutBookInput
-  upsert?: Prisma.BorrowedBookUpsertWithoutBookInput
-  disconnect?: Prisma.BorrowedBookWhereInput | boolean
-  delete?: Prisma.BorrowedBookWhereInput | boolean
-  connect?: Prisma.BorrowedBookWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.BorrowedBookUpdateToOneWithWhereWithoutBookInput, Prisma.BorrowedBookUpdateWithoutBookInput>, Prisma.BorrowedBookUncheckedUpdateWithoutBookInput>
+export type BorrowedBookUpdateManyWithoutBookNestedInput = {
+  create?: Prisma.XOR<Prisma.BorrowedBookCreateWithoutBookInput, Prisma.BorrowedBookUncheckedCreateWithoutBookInput> | Prisma.BorrowedBookCreateWithoutBookInput[] | Prisma.BorrowedBookUncheckedCreateWithoutBookInput[]
+  connectOrCreate?: Prisma.BorrowedBookCreateOrConnectWithoutBookInput | Prisma.BorrowedBookCreateOrConnectWithoutBookInput[]
+  upsert?: Prisma.BorrowedBookUpsertWithWhereUniqueWithoutBookInput | Prisma.BorrowedBookUpsertWithWhereUniqueWithoutBookInput[]
+  createMany?: Prisma.BorrowedBookCreateManyBookInputEnvelope
+  set?: Prisma.BorrowedBookWhereUniqueInput | Prisma.BorrowedBookWhereUniqueInput[]
+  disconnect?: Prisma.BorrowedBookWhereUniqueInput | Prisma.BorrowedBookWhereUniqueInput[]
+  delete?: Prisma.BorrowedBookWhereUniqueInput | Prisma.BorrowedBookWhereUniqueInput[]
+  connect?: Prisma.BorrowedBookWhereUniqueInput | Prisma.BorrowedBookWhereUniqueInput[]
+  update?: Prisma.BorrowedBookUpdateWithWhereUniqueWithoutBookInput | Prisma.BorrowedBookUpdateWithWhereUniqueWithoutBookInput[]
+  updateMany?: Prisma.BorrowedBookUpdateManyWithWhereWithoutBookInput | Prisma.BorrowedBookUpdateManyWithWhereWithoutBookInput[]
+  deleteMany?: Prisma.BorrowedBookScalarWhereInput | Prisma.BorrowedBookScalarWhereInput[]
 }
 
-export type BorrowedBookUncheckedUpdateOneWithoutBookNestedInput = {
-  create?: Prisma.XOR<Prisma.BorrowedBookCreateWithoutBookInput, Prisma.BorrowedBookUncheckedCreateWithoutBookInput>
-  connectOrCreate?: Prisma.BorrowedBookCreateOrConnectWithoutBookInput
-  upsert?: Prisma.BorrowedBookUpsertWithoutBookInput
-  disconnect?: Prisma.BorrowedBookWhereInput | boolean
-  delete?: Prisma.BorrowedBookWhereInput | boolean
-  connect?: Prisma.BorrowedBookWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.BorrowedBookUpdateToOneWithWhereWithoutBookInput, Prisma.BorrowedBookUpdateWithoutBookInput>, Prisma.BorrowedBookUncheckedUpdateWithoutBookInput>
+export type BorrowedBookUncheckedUpdateManyWithoutBookNestedInput = {
+  create?: Prisma.XOR<Prisma.BorrowedBookCreateWithoutBookInput, Prisma.BorrowedBookUncheckedCreateWithoutBookInput> | Prisma.BorrowedBookCreateWithoutBookInput[] | Prisma.BorrowedBookUncheckedCreateWithoutBookInput[]
+  connectOrCreate?: Prisma.BorrowedBookCreateOrConnectWithoutBookInput | Prisma.BorrowedBookCreateOrConnectWithoutBookInput[]
+  upsert?: Prisma.BorrowedBookUpsertWithWhereUniqueWithoutBookInput | Prisma.BorrowedBookUpsertWithWhereUniqueWithoutBookInput[]
+  createMany?: Prisma.BorrowedBookCreateManyBookInputEnvelope
+  set?: Prisma.BorrowedBookWhereUniqueInput | Prisma.BorrowedBookWhereUniqueInput[]
+  disconnect?: Prisma.BorrowedBookWhereUniqueInput | Prisma.BorrowedBookWhereUniqueInput[]
+  delete?: Prisma.BorrowedBookWhereUniqueInput | Prisma.BorrowedBookWhereUniqueInput[]
+  connect?: Prisma.BorrowedBookWhereUniqueInput | Prisma.BorrowedBookWhereUniqueInput[]
+  update?: Prisma.BorrowedBookUpdateWithWhereUniqueWithoutBookInput | Prisma.BorrowedBookUpdateWithWhereUniqueWithoutBookInput[]
+  updateMany?: Prisma.BorrowedBookUpdateManyWithWhereWithoutBookInput | Prisma.BorrowedBookUpdateManyWithWhereWithoutBookInput[]
+  deleteMany?: Prisma.BorrowedBookScalarWhereInput | Prisma.BorrowedBookScalarWhereInput[]
 }
 
 export type NullableDateTimeFieldUpdateOperationsInput = {
@@ -523,28 +528,25 @@ export type BorrowedBookCreateOrConnectWithoutBookInput = {
   create: Prisma.XOR<Prisma.BorrowedBookCreateWithoutBookInput, Prisma.BorrowedBookUncheckedCreateWithoutBookInput>
 }
 
-export type BorrowedBookUpsertWithoutBookInput = {
-  update: Prisma.XOR<Prisma.BorrowedBookUpdateWithoutBookInput, Prisma.BorrowedBookUncheckedUpdateWithoutBookInput>
-  create: Prisma.XOR<Prisma.BorrowedBookCreateWithoutBookInput, Prisma.BorrowedBookUncheckedCreateWithoutBookInput>
-  where?: Prisma.BorrowedBookWhereInput
+export type BorrowedBookCreateManyBookInputEnvelope = {
+  data: Prisma.BorrowedBookCreateManyBookInput | Prisma.BorrowedBookCreateManyBookInput[]
+  skipDuplicates?: boolean
 }
 
-export type BorrowedBookUpdateToOneWithWhereWithoutBookInput = {
-  where?: Prisma.BorrowedBookWhereInput
+export type BorrowedBookUpsertWithWhereUniqueWithoutBookInput = {
+  where: Prisma.BorrowedBookWhereUniqueInput
+  update: Prisma.XOR<Prisma.BorrowedBookUpdateWithoutBookInput, Prisma.BorrowedBookUncheckedUpdateWithoutBookInput>
+  create: Prisma.XOR<Prisma.BorrowedBookCreateWithoutBookInput, Prisma.BorrowedBookUncheckedCreateWithoutBookInput>
+}
+
+export type BorrowedBookUpdateWithWhereUniqueWithoutBookInput = {
+  where: Prisma.BorrowedBookWhereUniqueInput
   data: Prisma.XOR<Prisma.BorrowedBookUpdateWithoutBookInput, Prisma.BorrowedBookUncheckedUpdateWithoutBookInput>
 }
 
-export type BorrowedBookUpdateWithoutBookInput = {
-  borrowedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  returnedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  user?: Prisma.UserUpdateOneRequiredWithoutBorrowedBooksNestedInput
-}
-
-export type BorrowedBookUncheckedUpdateWithoutBookInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  userId?: Prisma.IntFieldUpdateOperationsInput | number
-  borrowedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  returnedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+export type BorrowedBookUpdateManyWithWhereWithoutBookInput = {
+  where: Prisma.BorrowedBookScalarWhereInput
+  data: Prisma.XOR<Prisma.BorrowedBookUpdateManyMutationInput, Prisma.BorrowedBookUncheckedUpdateManyWithoutBookInput>
 }
 
 export type BorrowedBookCreateManyUserInput = {
@@ -570,6 +572,33 @@ export type BorrowedBookUncheckedUpdateWithoutUserInput = {
 export type BorrowedBookUncheckedUpdateManyWithoutUserInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   bookId?: Prisma.IntFieldUpdateOperationsInput | number
+  borrowedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  returnedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+}
+
+export type BorrowedBookCreateManyBookInput = {
+  id?: number
+  userId: number
+  borrowedAt?: Date | string
+  returnedAt?: Date | string | null
+}
+
+export type BorrowedBookUpdateWithoutBookInput = {
+  borrowedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  returnedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  user?: Prisma.UserUpdateOneRequiredWithoutBorrowedBooksNestedInput
+}
+
+export type BorrowedBookUncheckedUpdateWithoutBookInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  userId?: Prisma.IntFieldUpdateOperationsInput | number
+  borrowedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  returnedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+}
+
+export type BorrowedBookUncheckedUpdateManyWithoutBookInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  userId?: Prisma.IntFieldUpdateOperationsInput | number
   borrowedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   returnedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }

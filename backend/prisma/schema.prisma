@@ -1,8 +1,6 @@
-
-
 generator client {
-  provider = "prisma-client"
-  output   = "../src/generated/prisma"
+  provider     = "prisma-client"
+  output       = "../src/generated/prisma"
   moduleFormat = "esm"
 }
 
@@ -15,42 +13,40 @@ model User {
   name          String
   email         String         @unique
   password      String
-  borrowedBooks BorrowedBook[]
   createdAt     DateTime       @default(now())
   updatedAt     DateTime       @updatedAt
+  borrowedBooks BorrowedBook[]
 }
 
 model Author {
   id        Int      @id @default(autoincrement())
   name      String
   bio       String?
-  books     Book[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  books     Book[]
 }
 
 model Book {
-  id          Int           @id @default(autoincrement())
+  id          Int            @id @default(autoincrement())
   title       String
   description String?
   genre       String?
   isbn        String?        @unique
   authorId    Int
-  author      Author         @relation(fields: [authorId], references: [id])
   isBorrowed  Boolean        @default(false)
-  borrowedBy  BorrowedBook[]
-  
   createdAt   DateTime       @default(now())
   updatedAt   DateTime       @updatedAt
+  author      Author         @relation(fields: [authorId], references: [id])
+  borrowedBy  BorrowedBook[]
 }
 
 model BorrowedBook {
-  id          Int       @id @default(autoincrement())
-  bookId      Int       
-  userId      Int
-  borrowedAt  DateTime  @default(now())
-  returnedAt  DateTime?
-
-  book Book   @relation(fields: [bookId], references: [id])
-  user User   @relation(fields: [userId], references: [id])
+  id         Int       @id @default(autoincrement())
+  bookId     Int
+  userId     Int
+  borrowedAt DateTime  @default(now())
+  returnedAt DateTime?
+  book       Book      @relation(fields: [bookId], references: [id],onDelete: Cascade)
+  user       User      @relation(fields: [userId], references: [id])
 }

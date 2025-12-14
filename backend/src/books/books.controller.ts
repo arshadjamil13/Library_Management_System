@@ -36,7 +36,7 @@ export class BooksController {
 
     @UseGuards(JwtGuard)
     @Delete(':id')
-    async deleteBook(@Param('id') id:string){
+    async deleteBook(@Param('id') id:number){
         return this.service.deleteBook(Number(id));
     }
 }

@@ -253,7 +253,7 @@ export type BookWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"Book"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Book"> | Date | string
   author?: Prisma.XOR<Prisma.AuthorScalarRelationFilter, Prisma.AuthorWhereInput>
-  borrowedBy?: Prisma.XOR<Prisma.BorrowedBookNullableScalarRelationFilter, Prisma.BorrowedBookWhereInput> | null
+  borrowedBy?: Prisma.BorrowedBookListRelationFilter
 }
 
 export type BookOrderByWithRelationInput = {
@@ -267,7 +267,7 @@ export type BookOrderByWithRelationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   author?: Prisma.AuthorOrderByWithRelationInput
-  borrowedBy?: Prisma.BorrowedBookOrderByWithRelationInput
+  borrowedBy?: Prisma.BorrowedBookOrderByRelationAggregateInput
 }
 
 export type BookWhereUniqueInput = Prisma.AtLeast<{
@@ -284,7 +284,7 @@ export type BookWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"Book"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Book"> | Date | string
   author?: Prisma.XOR<Prisma.AuthorScalarRelationFilter, Prisma.AuthorWhereInput>
-  borrowedBy?: Prisma.XOR<Prisma.BorrowedBookNullableScalarRelationFilter, Prisma.BorrowedBookWhereInput> | null
+  borrowedBy?: Prisma.BorrowedBookListRelationFilter
 }, "id" | "isbn">
 
 export type BookOrderByWithAggregationInput = {
@@ -328,7 +328,7 @@ export type BookCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   author: Prisma.AuthorCreateNestedOneWithoutBooksInput
-  borrowedBy?: Prisma.BorrowedBookCreateNestedOneWithoutBookInput
+  borrowedBy?: Prisma.BorrowedBookCreateNestedManyWithoutBookInput
 }
 
 export type BookUncheckedCreateInput = {
@@ -341,7 +341,7 @@ export type BookUncheckedCreateInput = {
   isBorrowed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
-  borrowedBy?: Prisma.BorrowedBookUncheckedCreateNestedOneWithoutBookInput
+  borrowedBy?: Prisma.BorrowedBookUncheckedCreateNestedManyWithoutBookInput
 }
 
 export type BookUpdateInput = {
@@ -353,7 +353,7 @@ export type BookUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   author?: Prisma.AuthorUpdateOneRequiredWithoutBooksNestedInput
-  borrowedBy?: Prisma.BorrowedBookUpdateOneWithoutBookNestedInput
+  borrowedBy?: Prisma.BorrowedBookUpdateManyWithoutBookNestedInput
 }
 
 export type BookUncheckedUpdateInput = {
@@ -366,7 +366,7 @@ export type BookUncheckedUpdateInput = {
   isBorrowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  borrowedBy?: Prisma.BorrowedBookUncheckedUpdateOneWithoutBookNestedInput
+  borrowedBy?: Prisma.BorrowedBookUncheckedUpdateManyWithoutBookNestedInput
 }
 
 export type BookCreateManyInput = {
@@ -532,7 +532,7 @@ export type BookCreateWithoutAuthorInput = {
   isBorrowed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
-  borrowedBy?: Prisma.BorrowedBookCreateNestedOneWithoutBookInput
+  borrowedBy?: Prisma.BorrowedBookCreateNestedManyWithoutBookInput
 }
 
 export type BookUncheckedCreateWithoutAuthorInput = {
@@ -544,7 +544,7 @@ export type BookUncheckedCreateWithoutAuthorInput = {
   isBorrowed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
-  borrowedBy?: Prisma.BorrowedBookUncheckedCreateNestedOneWithoutBookInput
+  borrowedBy?: Prisma.BorrowedBookUncheckedCreateNestedManyWithoutBookInput
 }
 
 export type BookCreateOrConnectWithoutAuthorInput = {
@@ -669,7 +669,7 @@ export type BookUpdateWithoutAuthorInput = {
   isBorrowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  borrowedBy?: Prisma.BorrowedBookUpdateOneWithoutBookNestedInput
+  borrowedBy?: Prisma.BorrowedBookUpdateManyWithoutBookNestedInput
 }
 
 export type BookUncheckedUpdateWithoutAuthorInput = {
@@ -681,7 +681,7 @@ export type BookUncheckedUpdateWithoutAuthorInput = {
   isBorrowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  borrowedBy?: Prisma.BorrowedBookUncheckedUpdateOneWithoutBookNestedInput
+  borrowedBy?: Prisma.BorrowedBookUncheckedUpdateManyWithoutBookNestedInput
 }
 
 export type BookUncheckedUpdateManyWithoutAuthorInput = {
@@ -696,6 +696,35 @@ export type BookUncheckedUpdateManyWithoutAuthorInput = {
 }
 
 
+/**
+ * Count Type BookCountOutputType
+ */
+
+export type BookCountOutputType = {
+  borrowedBy: number
+}
+
+export type BookCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  borrowedBy?: boolean | BookCountOutputTypeCountBorrowedByArgs
+}
+
+/**
+ * BookCountOutputType without action
+ */
+export type BookCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the BookCountOutputType
+   */
+  select?: Prisma.BookCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * BookCountOutputType without action
+ */
+export type BookCountOutputTypeCountBorrowedByArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.BorrowedBookWhereInput
+}
+
 
 export type BookSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -709,6 +738,7 @@ export type BookSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   updatedAt?: boolean
   author?: boolean | Prisma.AuthorDefaultArgs<ExtArgs>
   borrowedBy?: boolean | Prisma.Book$borrowedByArgs<ExtArgs>
+  _count?: boolean | Prisma.BookCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["book"]>
 
 export type BookSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -753,6 +783,7 @@ export type BookOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = run
 export type BookInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   author?: boolean | Prisma.AuthorDefaultArgs<ExtArgs>
   borrowedBy?: boolean | Prisma.Book$borrowedByArgs<ExtArgs>
+  _count?: boolean | Prisma.BookCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type BookIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   author?: boolean | Prisma.AuthorDefaultArgs<ExtArgs>
@@ -765,7 +796,7 @@ export type $BookPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   name: "Book"
   objects: {
     author: Prisma.$AuthorPayload<ExtArgs>
-    borrowedBy: Prisma.$BorrowedBookPayload<ExtArgs> | null
+    borrowedBy: Prisma.$BorrowedBookPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1172,7 +1203,7 @@ readonly fields: BookFieldRefs;
 export interface Prisma__BookClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   author<T extends Prisma.AuthorDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AuthorDefaultArgs<ExtArgs>>): Prisma.Prisma__AuthorClient<runtime.Types.Result.GetResult<Prisma.$AuthorPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  borrowedBy<T extends Prisma.Book$borrowedByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Book$borrowedByArgs<ExtArgs>>): Prisma.Prisma__BorrowedBookClient<runtime.Types.Result.GetResult<Prisma.$BorrowedBookPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  borrowedBy<T extends Prisma.Book$borrowedByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Book$borrowedByArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BorrowedBookPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1623,6 +1654,11 @@ export type Book$borrowedByArgs<ExtArgs extends runtime.Types.Extensions.Interna
    */
   include?: Prisma.BorrowedBookInclude<ExtArgs> | null
   where?: Prisma.BorrowedBookWhereInput
+  orderBy?: Prisma.BorrowedBookOrderByWithRelationInput | Prisma.BorrowedBookOrderByWithRelationInput[]
+  cursor?: Prisma.BorrowedBookWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.BorrowedBookScalarFieldEnum | Prisma.BorrowedBookScalarFieldEnum[]
 }
 
 /**
