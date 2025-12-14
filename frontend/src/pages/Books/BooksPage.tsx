@@ -19,7 +19,7 @@ export default function BooksPage(){
 
     useEffect(()=>{
         const fetchBooks = async ()=>{
-            const result = await getAllBooks()
+            const result = await getAllBooks(token)
             setBooks(result.data)
         } 
         fetchBooks()
@@ -53,14 +53,14 @@ export default function BooksPage(){
     const handleFormSubmit = async (data :any)=>{
         try{
         if(!editBook){
-            const createdBook = await AddBooks(data)
+            const createdBook = await AddBooks(data,token)
             console.log(createdBook)
             if(!createdBook) return 
             setBooks((prev) => [...prev, createdBook])
 
         }else{
 
-            const updatedBook = await EditBooks(data,editBook.id)
+            const updatedBook = await EditBooks(data,editBook.id,token)
             setBooks((prev)=>
                  prev.map((b)=> (b.id === updatedBook.id ? updatedBook : b))
             )
@@ -77,7 +77,7 @@ export default function BooksPage(){
         if (!confirmDelete) return
         try{
             
-            const deletedBook = await DeleteBook(BookId)
+            const deletedBook = await DeleteBook(BookId,token)
             if(deletedBook){
                 setBooks((prev)=>prev.filter((book)=> book.id !== BookId))
             }
@@ -90,7 +90,7 @@ export default function BooksPage(){
     const handleBorrowBook=async(books:any)=>{
         if(!books.isBorrowed){
             try{
-                const BookBorrowed = await BorrowBook(user.id,books.id)
+                const BookBorrowed = await BorrowBook(user.id,books.id,token)
                 if(BookBorrowed){
                     setBooks((prev)=> prev.map((book)=>book.id === books.id ? {...book,isBorrowed: true }:book))
                 }
@@ -101,7 +101,7 @@ export default function BooksPage(){
         }else{
             try{
             
-                const Bookreturned = await returnBook(books.id)
+                const Bookreturned = await returnBook(books.id,token)
                 if(Bookreturned){
                      setBooks((prev)=> prev.map((book)=>book.id === books.id ? {...book,isBorrowed: false }:book))
                 }

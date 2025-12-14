@@ -1,6 +1,6 @@
-const token = localStorage.getItem("token")
+// const token = localStorage.getItem("token")
 
-export async function returnBook(id:number){
+export async function returnBook(id:number,token:string | null){
     try {
         const res = await fetch(`${import.meta.env.VITE_API_URL}/borrowing/return`, {
                 method: "PATCH",
@@ -19,7 +19,7 @@ export async function returnBook(id:number){
     }
 }
 
-export async function getBorrowedBooks(id:number){
+export async function getBorrowedBooks(id:number,token:string | null){
     try {
         const res = await fetch(`${import.meta.env.VITE_API_URL}/borrowing/user/${id}`, {
                 headers: {

@@ -1,7 +1,7 @@
 
-const token = localStorage.getItem("token")
+// const token = localStorage.getItem("token")
 
-export async function fetchBooks(){
+export async function fetchBooks(token:string | null){
     try{
          const res = await fetch(`${import.meta.env.VITE_API_URL}/authors`,{
                 headers:{
@@ -15,7 +15,7 @@ export async function fetchBooks(){
     }
 }
 
-export async function editAuthors(data:any,id:number){
+export async function editAuthors(data:any,id:number,token:string | null){
     try{
 
          const response = await fetch(`${import.meta.env.VITE_API_URL}/authors/${id}`,{
@@ -42,7 +42,7 @@ export async function editAuthors(data:any,id:number){
     }
 }
 
-export async function createAuthor(data:any){
+export async function createAuthor(data:any,token:string | null){
     try{
         const response = await fetch(`${import.meta.env.VITE_API_URL}/authors`,{
                 method : "POST",
@@ -67,7 +67,7 @@ export async function createAuthor(data:any){
     }
 }
 
-export async function deleteAuthor(id:number){
+export async function deleteAuthor(id:number,token:string | null){
     try{
         const response = await fetch(`${import.meta.env.VITE_API_URL}/authors/${id}`,{
                 method : "DELETE",

@@ -23,7 +23,7 @@ const handleDelete =async (id:number)=>{
     const confirmDelete = window.confirm("Are You Sure you want to delete the book")
     if (!confirmDelete) return
     try{
-        const deleted = await deleteAuthor(id)
+        const deleted = await deleteAuthor(id,token)
         if(deleted){
             setauthors((prev)=>prev.filter((author)=> author.id !== id))
         }
@@ -35,7 +35,7 @@ const handleDelete =async (id:number)=>{
 
 useEffect(()=>{
         const fetchedBooks = async ()=>{
-            const result = await fetchBooks()
+            const result = await fetchBooks(token)
             setauthors(result)
         } 
         fetchedBooks()
@@ -45,7 +45,7 @@ useEffect(()=>{
 const handleformSubmit=async (data:any)=>{
     if(editAuthor){
 
-            const updatedauthors = await editAuthors(data,editAuthor.id)
+            const updatedauthors = await editAuthors(data,editAuthor.id,token)
             setEditAuthor(null)
             setShowModal(false)
             setauthors((prev)=>
@@ -54,7 +54,7 @@ const handleformSubmit=async (data:any)=>{
 
     }else{
         
-            const createdAuthor = await createAuthor(data)
+            const createdAuthor = await createAuthor(data,token)
             setShowModal(false)
             setauthors((prev) => [...prev, createdAuthor])
         

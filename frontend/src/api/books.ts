@@ -1,6 +1,6 @@
-const token = localStorage.getItem("token")
+// const token = localStorage.getItem("token")
 
-export async function getAllBooks(){
+export async function getAllBooks(token: string | null){
     try{
         const res = await fetch(`${import.meta.env.VITE_API_URL}/books`,{
                 headers:{
@@ -14,7 +14,7 @@ export async function getAllBooks(){
     }
 }
 
-export async function AddBooks(data:any){
+export async function AddBooks(data:any,token: string | null){
     try{
         const response = await fetch(`${import.meta.env.VITE_API_URL}/books`,{
                 method : "POST",
@@ -42,7 +42,7 @@ export async function AddBooks(data:any){
     }
 }
 
-export async function EditBooks(data:any,id:number){
+export async function EditBooks(data:any,id:number,token: string | null){
     try{
         const response = await fetch(`${import.meta.env.VITE_API_URL}/books/${id}`,{
                 method: "PATCH",
@@ -69,7 +69,7 @@ export async function EditBooks(data:any,id:number){
     }
 }
 
-export async function DeleteBook(BookId:number){
+export async function DeleteBook(BookId:number,token: string | null){
     try{
         const response = await fetch(`${import.meta.env.VITE_API_URL}/books/${BookId}`,{
                 method : "DELETE",
@@ -89,7 +89,7 @@ export async function DeleteBook(BookId:number){
     }
 }
 
-export async function BorrowBook(userId:number,BookId:number){
+export async function BorrowBook(userId:number,BookId:number,token: string | null){
     try{
         const response = await fetch(
               `${import.meta.env.VITE_API_URL}/borrowing/borrow`,

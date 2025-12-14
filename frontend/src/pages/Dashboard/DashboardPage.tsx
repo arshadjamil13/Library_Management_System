@@ -4,14 +4,14 @@ import { getBorrowedBooks, returnBook } from "../../api/dashboard";
 
 
 export default function DashboardPage(){
-    const {user} = useAuth()
+    const {user,Loading,token} = useAuth()
     const [borrowedBooks,setBorrowedBooks] = useState<any[]>([]);
     const [loading, setLoading] = useState(true);
 
     const fetchBorrowedBooks = async () => {
         try {
             setLoading(true);
-            const data = await getBorrowedBooks(user.id)
+            const data = await getBorrowedBooks(user.id,token)
             if(!data){
                 setBorrowedBooks([]);
                 throw new Error("Failed to load borrowed books");
@@ -25,14 +25,16 @@ export default function DashboardPage(){
     };
 
     useEffect(() => {
+        if(Loading) return
+        if (!user || !token) return
         if (user?.id) fetchBorrowedBooks();
-    }, [user]);
+    }, [user,Loading]);
 
 
     async function handleReturn(bookId: number){
         try{
 
-            const Bookreturned = await returnBook(bookId)
+            const Bookreturned = await returnBook(bookId,token)
             if(Bookreturned){
                 
                 fetchBorrowedBooks();
