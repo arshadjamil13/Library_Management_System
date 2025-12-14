@@ -1,5 +1,4 @@
 
-// const token = localStorage.getItem("token")
 
 export async function fetchBooks(token:string | null){
     try{

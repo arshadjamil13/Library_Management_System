@@ -1,4 +1,3 @@
-// const token = localStorage.getItem("token")
 
 export async function getAllBooks(token: string | null){
     try{
